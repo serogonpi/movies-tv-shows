@@ -8,7 +8,6 @@ This project builds an end-to-end batch data pipeline that ingests, transforms, 
 
 - **Which platform has the largest catalog, and what is the Movie vs TV Show split?**
 - **How has content production evolved over the years across platforms?**
-- **What genres and ratings dominate each platform?**
 
 ## Architecture
 
@@ -100,7 +99,7 @@ Built with Power BI, the dashboard includes:
 ### Step 1: Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/serogonpi/movies-tv-shows
 cd "Movies and TV Shows"
 ```
 
@@ -128,7 +127,8 @@ cd terraform
 terraform init
 terraform plan
 terraform apply
-```
+
+cd ..
 
 This creates:
 - A GCP project
