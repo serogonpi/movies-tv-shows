@@ -1,0 +1,12 @@
+[project]
+name = "movies-and-tv-shows"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "google-cloud-storage>=3.10.0",
+    "jupyter>=1.1.1",
+    "kagglehub>=1.0.0",
+    "pandas>=3.0.1",
+]

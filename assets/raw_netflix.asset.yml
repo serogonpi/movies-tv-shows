@@ -1,0 +1,8 @@
+name: movies_tv_shows.raw_netflix
+type: ingestr
+
+parameters:
+  source_connection: gcs
+  source_table: 'movies-tv-show-19032026/netflix/netflix_titles.csv'
+  destination: bigquery
+  loader_file_format: parquet

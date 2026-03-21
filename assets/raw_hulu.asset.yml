@@ -1,0 +1,8 @@
+name: movies_tv_shows.raw_hulu
+type: ingestr
+
+parameters:
+  source_connection: gcs
+  source_table: 'movies-tv-show-19032026/hulu/hulu_titles.csv'
+  destination: bigquery
+  loader_file_format: parquet
