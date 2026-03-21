@@ -1,4 +1,4 @@
-.PHONY: setup infra data pipeline all clean
+.PHONY: setup infra data pipeline all clean test
 
 setup:
 	uv sync
@@ -12,7 +12,10 @@ data:
 pipeline:
 	cd bruin && bruin run .
 
-all: setup infra data pipeline
+test:
+	uv run pytest tests/ -v
+
+all: setup infra data pipeline test
 
 clean:
 	cd terraform && terraform destroy

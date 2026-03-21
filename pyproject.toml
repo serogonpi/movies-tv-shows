@@ -10,3 +10,9 @@ dependencies = [
     "kagglehub>=1.0.0",
     "pandas>=3.0.1",
 ]
+
+[dependency-groups]
+dev = [
+    "google-cloud-bigquery>=3.40.1",
+    "pytest>=9.0.2",
+]
