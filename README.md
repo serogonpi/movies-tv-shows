@@ -129,6 +129,7 @@ terraform plan
 terraform apply
 
 cd ..
+```
 
 This creates:
 - A GCP project
@@ -183,20 +184,59 @@ This will:
 
 ```
 .
-├── assets/                        # Bruin pipeline assets
-│   ├── raw_hulu.asset.yml         # Ingest Hulu data from GCS to BQ
-│   ├── raw_netflix.asset.yml      # Ingest Netflix data from GCS to BQ
-│   ├── raw_amazon_prime.asset.yml # Ingest Amazon data from GCS to BQ
-│   ├── raw_disney_plus.asset.yml  # Ingest Disney+ data from GCS to BQ
-│   └── all_titles.sql             # SQL transformation: union + clean + deduplicate
-├── terraform/                     # Infrastructure as Code
-│   ├── main.tf                    # GCP resources definition
-│   └── variables.tf               # Terraform variables
-├── .bruin.yml                     # Bruin connection config (gitignored)
-├── pipeline.yml                   # Bruin pipeline definition
-├── get_data.py                    # Download datasets + upload to GCS
-├── get_data.ipynb                 # Exploratory data analysis notebook
-├── dashboard.png                  # Dashboard screenshot
-├── pyproject.toml                 # Python project config
+├── assets/                  # Bruin pipeline assets
+│   ├── raw_hulu.asset.yml
+│   ├── raw_netflix.asset.yml
+│   ├── raw_amazon_prime.asset.yml
+│   ├── raw_disney_plus.asset.yml
+│   └── all_titles.sql       # Transformation query
+├── terraform/
+│   ├── main.tf
+│   └── variables.tf
+├── tests/
+│   └── test_pipeline.py
+├── .github/workflows/
+│   └── ci.yml
+├── .bruin.yml               # Bruin config (gitignored)
+├── pipeline.yml
+├── get_data.py
+├── get_data.ipynb
+├── dashboard.png
+├── Makefile
+├── pyproject.toml
 └── README.md
 ```
+
+## Extras
+
+### Makefile
+
+All pipeline steps are automated with `make`:
+
+| Command | Description |
+|---|---|
+| `make setup` | Install Python dependencies |
+| `make infra` | Provision GCP infrastructure with Terraform |
+| `make data` | Download datasets and upload to GCS |
+| `make clean-bq` | Clean BigQuery tables before re-ingestion |
+| `make pipeline` | Clean BQ tables + run Bruin pipeline (ingest + transform) |
+| `make test` | Run tests with pytest |
+| `make all` | Run all steps end-to-end |
+| `make clean` | Destroy GCP infrastructure |
+
+### Tests
+
+Tests are defined with `pytest` and validate three levels:
+
+- **Local data** — CSV files exist for each platform
+- **Google Cloud Storage** — Bucket exists and contains all expected files
+- **BigQuery** — Tables exist, `all_titles` has data, and all 4 platforms are present
+
+Run with: `make test`
+
+### CI/CD
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push and PR to `main`:
+
+- **Python Lint** — validates code with Ruff
+- **Terraform Validate** — checks Terraform syntax

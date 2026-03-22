@@ -8,11 +8,11 @@ materialization:
     cluster_by:
         - platform
         - type
-    depends:
-        - movies_tv_shows.raw_hulu
-        - movies_tv_shows.raw_netflix
-        - movies_tv_shows.raw_amazon_prime
-        - movies_tv_shows.raw_disney_plus
+depends:
+    - movies_tv_shows.raw_hulu
+    - movies_tv_shows.raw_netflix
+    - movies_tv_shows.raw_amazon
+    - movies_tv_shows.raw_disney_plus
 @bruin */
 
 WITH deduplicated AS(

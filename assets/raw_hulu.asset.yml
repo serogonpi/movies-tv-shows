@@ -5,4 +5,5 @@ parameters:
   source_connection: gcs
   source_table: 'movies-tv-show-19032026/hulu/hulu_titles.csv'
   destination: bigquery
+  incremental_strategy: replace
   loader_file_format: parquet
